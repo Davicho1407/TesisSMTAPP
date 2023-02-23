@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "154332830224",
+    "project_id": "smtapptesis",
+    "storage_bucket": "smtapptesis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154332830224:android:184ce1ae22db5484a28895",
+        "android_client_info": {
+          "package_name": "com.example.smt_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154332830224-h6aai72iqsb16c5k50pmoihe275m2pmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smt_app",
+            "certificate_hash": "8e074246d2f5896370da951eea0bdf65a14f1af6"
+          }
+        },
+        {
+          "client_id": "154332830224-1v1n04i767r3pgdp0fl409pnl5buojq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVG94CxAJrS15bgqd1zy4ygftuztu8Px0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154332830224-1v1n04i767r3pgdp0fl409pnl5buojq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
