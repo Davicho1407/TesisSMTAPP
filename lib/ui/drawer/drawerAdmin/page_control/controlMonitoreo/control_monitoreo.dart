@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:smt_app/ui/drawer/drawerAdmin/page_control/controlMonitoreo/analisis_datos.dart';
 
 class ControlMonitoreo extends StatelessWidget {
   const ControlMonitoreo({super.key});
@@ -43,9 +44,10 @@ class __ManejoSensorState extends State<_ManejoSensor> {
   void _generateValues() {
     setState(() {
       _value1 =
-          '${_random.nextInt(5) + 25}.${_random.nextInt(100).toString().padLeft(2, '0')}';
+          '${_random.nextInt(5) + 14}.${_random.nextInt(100).toString().padLeft(2, '0')}';
       _value2 =
           '${_random.nextInt(2) + 20}.${_random.nextInt(100).toString().padLeft(2, '0')}';
+      // _value2 = '2.78';
       _value3 =
           '${_random.nextInt(1) + 6}.${_random.nextInt(100).toString().padLeft(2, '0')}';
     });
@@ -203,8 +205,13 @@ class __ManejoSensorState extends State<_ManejoSensor> {
                           fontSize: 20),
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/analisisD');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AnalizarDatos(value2: _value2),
+                        ),
+                      );
+                      ;
                     }),
               ]),
             )

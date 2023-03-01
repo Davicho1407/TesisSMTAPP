@@ -1,19 +1,29 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class AnalizarDatos extends StatefulWidget {
-  static Widget create(BuildContext context) => AnalizarDatos();
+  final String value2;
 
-  const AnalizarDatos({super.key});
-
+  const AnalizarDatos({Key? key, required this.value2}) : super(key: key);
   @override
   State<AnalizarDatos> createState() => _AnalizarDatosState();
 }
 
 class _AnalizarDatosState extends State<AnalizarDatos> {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+
+  Future<void> obtenerDatos() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('usuarios').doc(uid);
+    final datos;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,48 +54,6 @@ class _DatosAnalisis extends StatefulWidget {
 }
 
 class __DatosAnalisisState extends State<_DatosAnalisis> {
-  String _value1 = '';
-  String _value2 = '';
-  String _value3 = '';
-
-  void _generateValues() {
-    setState(() {
-      _value1 =
-          '${_random.nextInt(5) + 25}.${_random.nextInt(100).toString().padLeft(2, '0')}';
-      _value2 =
-          '${_random.nextInt(2) + 20}.${_random.nextInt(100).toString().padLeft(2, '0')}';
-      _value3 =
-          '${_random.nextInt(1) + 6}.${_random.nextInt(100).toString().padLeft(2, '0')}';
-    });
-  }
-
-  final _random = new Random();
-  final words = [
-    'alrveja',
-    'cebada',
-    'trigo',
-    'papa',
-    'cebolla',
-    'haba',
-    'frijol',
-    'maiz'
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _selectWord();
-  }
-
-  String _word = '';
-  void _selectWord() {
-    setState(() {
-      final random = Random();
-      final index = random.nextInt(words.length);
-      _word = words[index];
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,6 +113,29 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
           SizedBox(
             height: 32,
           ),
+          MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              elevation: 5.0,
+              height: 40,
+              color: Colors.blue.shade900,
+              child: Text(
+                'Analizar de datos',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+              onPressed: () {
+                setState(() {
+                  generateRandomWords(0, '1');
+                });
+
+                //generar valores random
+              }),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             padding: EdgeInsets.all(20),
             height: 350,
@@ -170,7 +161,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_word}',
+                    randomWords[0],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -185,7 +176,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(5) + 25}.${_random.nextInt(100).toString().padLeft(2, '0')}°C',
+                    randomWords[1],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -200,22 +191,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(2) + 20}.${_random.nextInt(100).toString().padLeft(2, '0')}%',
-                    style: TextStyle(fontSize: 20),
-                  )),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all((Radius.circular(30)))),
-                  child: Center(
-                      child: Text(
-                    '${_random.nextInt(1) + 6}.${_random.nextInt(100).toString().padLeft(2, '0')}',
+                    randomWords[2],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -250,7 +226,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_word}',
+                    randomWords[3],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -265,7 +241,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(5) + 25}.${_random.nextInt(100).toString().padLeft(2, '0')}°C',
+                    randomWords[4],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -280,30 +256,12 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(2) + 20}.${_random.nextInt(100).toString().padLeft(2, '0')}%',
-                    style: TextStyle(fontSize: 20),
-                  )),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all((Radius.circular(30)))),
-                  child: Center(
-                      child: Text(
-                    '${_random.nextInt(1) + 6}.${_random.nextInt(100).toString().padLeft(2, '0')}',
+                    randomWords[5],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 32,
           ),
           SizedBox(
             height: 32,
@@ -333,7 +291,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_word}',
+                    randomWords[6],
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -348,7 +306,7 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(5) + 25}.${_random.nextInt(100).toString().padLeft(2, '0')}°C',
+                    word8,
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
@@ -363,24 +321,12 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
                       borderRadius: BorderRadius.all((Radius.circular(30)))),
                   child: Center(
                       child: Text(
-                    '${_random.nextInt(2) + 20}.${_random.nextInt(100).toString().padLeft(2, '0')}%',
+                    word9,
                     style: TextStyle(fontSize: 20),
                   )),
                 ),
                 SizedBox(
                   height: 16,
-                ),
-                Container(
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all((Radius.circular(30)))),
-                  child: Center(
-                      child: Text(
-                    '${_random.nextInt(1) + 6}.${_random.nextInt(100).toString().padLeft(2, '0')}',
-                    style: TextStyle(fontSize: 20),
-                  )),
                 ),
               ],
             ),
@@ -392,4 +338,80 @@ class __DatosAnalisisState extends State<_DatosAnalisis> {
       ),
     );
   }
+
+  String value2 = '0';
+
+  final List<String> finalWords = [
+    'alrveja',
+    'cebada',
+    'trigo',
+    'papa',
+    'cebolla',
+    'haba',
+    'frijol',
+    'maiz',
+    'quinua'
+  ];
+  List<String> randomWords = List.filled(8, '');
+  String word1 = '';
+  String word2 = '';
+  String word3 = '';
+  String word4 = '';
+  String word5 = '';
+  String word6 = '';
+  String word7 = '';
+  String word8 = '';
+  String word9 = '';
+
+  void generateRandomWords(int excludeCount, String value2) {
+    // Verifica que la longitud del array sea mayor o igual al número de índices aleatorios que se generarán
+    int numRandomIndices = min(8, finalWords.length - excludeCount);
+
+    // Genera un conjunto de índices aleatorios únicos en el rango de 0 a la longitud del array menos uno, excluyendo los índices que se deben omitir
+    Set<int> randomIndices = Set();
+    while (randomIndices.length < numRandomIndices) {
+      int index = Random().nextInt(finalWords.length);
+      if (excludeCount > 0 && index < excludeCount)
+        continue; // Salta los índices que se deben omitir
+      randomIndices.add(index);
+    }
+
+    // Usa los índices aleatorios para seleccionar las palabras al azar del array finalWords
+    List<String> selectedWords =
+        randomIndices.map((i) => finalWords[i]).toList();
+
+    // Selecciona una palabra al azar del conjunto de palabras seleccionadas al azar y la asigna a cada widget
+    Set<String> uniqueWords = Set();
+    for (int i = 0; i < selectedWords.length && uniqueWords.length < 7; i++) {
+      String word = selectedWords[i];
+      if (!uniqueWords.contains(word)) {
+        uniqueWords.add(word);
+        randomWords[uniqueWords.length - 1] = word;
+      }
+    }
+
+    if (value2 == '0') {
+      for (int i = 0; i < 4; i++) {
+        randomWords[i] = '';
+      }
+    }
+
+    setState(() {});
+  }
+  // @override
+  // void initState() {
+  //   _selectWord();
+
+  //   super.initState();
+  // }
+
+  // String _word = '';
+  // void _selectWord() {
+  //   setState(() {
+  //     final random = Random();
+  //     final index = random.nextInt(words.length);
+  //     _word = words[index];
+  //   });
+  // }
+
 }

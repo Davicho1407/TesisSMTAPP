@@ -66,8 +66,8 @@ class Routes {
 
       case controlMonitoreo:
         return _buildRoute(ControlMonitoreo.create);
-      case analisisDatos:
-        return _buildRoute(AnalizarDatos.create);
+      // case analisisDatos:
+      //   return _buildRoute(AnalizarDatos.create);
       case reportes:
         return _buildRoute(Reportes.create);
       case administracionAdmin:
